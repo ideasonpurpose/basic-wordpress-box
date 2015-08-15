@@ -1,0 +1,12 @@
+---
+
+- name: Write Opcache disabling INI
+  copy:
+    src=disable_opcache.ini
+    dest=/etc/php5/mods-available/disable_opcache.ini
+    mode=0644
+
+- name: Enable Opcache disabling INI
+  command: php5enmod disable_opcache
+  notify:
+    - restart apache

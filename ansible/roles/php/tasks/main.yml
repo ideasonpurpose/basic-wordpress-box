@@ -1,0 +1,6 @@
+---
+
+- include: php.yml
+
+- include: composer.yml
+  when: install_composer

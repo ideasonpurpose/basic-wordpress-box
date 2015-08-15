@@ -1,0 +1,17 @@
+---
+
+- name: Get Composer installer temp path
+  command: mktemp /tmp/composer-installer-XXXX
+  register: composer_installer
+
+- name: Get the Composer installer script
+  get_url: url=https://getcomposer.org/installer dest={{ composer_installer.stdout }} force=yes
+
+- name: Install Composer
+  command: php -f {{ composer_installer.stdout }} -- --install-dir=/usr/local/bin 
+
+- name: Rename composer.phar to composer
+  command: mv /usr/local/bin/composer.phar /usr/local/bin/composer
+
+- name: Remove Composer installer temp
+  file: path={{ composer_installer.stdout }} state=absent

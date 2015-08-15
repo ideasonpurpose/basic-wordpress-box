@@ -1,0 +1,13 @@
+---
+
+php_debug: false
+
+php_error_reporting: E_ALL
+
+php_fastcgi: false
+
+xhprof_output_dir: /var/tmp/xhprof
+
+install_composer: true
+
+php_timezone: America/New_York

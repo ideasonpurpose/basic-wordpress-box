@@ -1,0 +1,38 @@
+---
+
+- name: Create the user account
+  user:
+    name={{ user }}
+    password={{ password }}
+    groups=sudo,www-data,syslog
+    append=yes
+    shell=/bin/bash
+
+- name: create a placeholder authorized_keys file
+  authorized_key: 
+    user={{ user }}
+    key='ssh-rsa {{ ansible_ssh_host_key_dsa_public }}'
+  register: auth_keys
+
+- name: Duplicate root's authorized_keys to user
+  shell: cat ~/.ssh/authorized_keys > {{ auth_keys.keyfile }}
+
+- name: Add admin user to sudoers
+  lineinfile: 
+    dest=/etc/sudoers
+    state=present
+    regexp='^{{ user }}'
+    line='{{ user }} ALL=(ALL) NOPASSWD:ALL'
+    validate='visudo -cf %s'
+
+- name: Set system umask to 0002
+  lineinfile: 
+    dest=/etc/login.defs
+    regexp='^UMASK\s+\d+'
+    line='UMASK           002'
+    state=present
+
+- name: Install our custom .profile
+  copy:
+    src=profile
+    dest=/home/{{ user }}/.profile

@@ -1,0 +1,12 @@
+---
+
+- name: Create Vagrant user as root
+  hosts: all
+  sudo: yes
+  gather_facts: yes
+
+#  roles:
+    #- { role: "create_user", user: "vagrant", password: "vagrant" }
+
+  tasks: 
+    - debug: "hello"
