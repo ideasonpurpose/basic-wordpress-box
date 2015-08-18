@@ -32,12 +32,12 @@
     - error_reporting
     - xmlrpc
     - gd
-  notify:
-    - restart apache
+  # notify:
+  #   - restart apache
 
-- name: Enable Apache2 PHP module
-  command: a2enmod {{ item }}
-  with_items:
-    - php5
-  notify:
-    - restart apache
+# - name: Enable Apache2 PHP module
+#   command: a2enmod {{ item }}
+#   with_items:
+#     - php5
+  # notify:
+  #   - restart apache

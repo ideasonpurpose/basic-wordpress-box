@@ -7,6 +7,6 @@
   tasks: 
     - debug: "hello"
   
-  roles: 
-    - php
-    - php5-xdebug
+  # roles: 
+  #   - php
+  #   - php5-xdebug

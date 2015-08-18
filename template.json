@@ -3,11 +3,6 @@
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/ansible.sh"
     },
     {
@@ -21,51 +16,18 @@
     ],
   "builders": [
     {
-      "type": "virtualbox-iso",
-      "boot_command": [
-        "<esc><wait>",
-        "<esc><wait>",
-        "<enter><wait>",
-        "/install/vmlinuz",
-        " auto=true",
-        " priority=critical",
-        " initrd=/install/initrd.gz",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-        " -- ",
-        "<enter>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": 81920,
-      "guest_os_type": "Ubuntu_64",
-      "headless": false,
-      "http_directory": "http",
-      "iso_urls": [
-        "iso/ubuntu-14.04.3-server-amd64.iso",
-        "http://releases.ubuntu.com/14.04/ubuntu-14.04.3-server-amd64.iso"
-      ],
-      "iso_checksum_type": "md5",
-      "iso_checksum": "9e5fecc94b3925bededed0fdca1bd417",
+      "type": "virtualbox-ovf",
+      "source_path": "iso/trusty-server-cloudimg-i386-vagrant-disk1/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
+      "boot_wait": "10s",
+      "headless": false,
+      "ssh_wait_timeout": "300s",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "virtualbox_version_file": ".vbox_version",
-      "vm_name": "packer-ubuntu-14.04-amd64",
+      "vm_name": "packer-basic-wp-box",
       "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "512"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ]
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
+        ["modifyvm", "{{.Name}}", "--ioapic", "off"]
       ]
     }
   ],

@@ -8,11 +8,18 @@ The primary purpose of this project is to frontload configuration and provisioni
 
 [Ubuntu's Cloud Images](http://cloud-images.ubuntu.com) were the base for this box. I built from the [Ubuntu Server 14.04 LTS (Trusty Tahr) daily build](http://cloud-images.ubuntu.com/vagrant/trusty/current/) because there's just no reason for me to be compiliung this from scratch. I used the 32-bit version since this is going to be emulated with limited memory and nothing in WordPress is especially computationally taxing. There's just no reason to bother with 64-bit addressing for this. 
 
+This Vagrant box is just a zip file, so I extracted it to get to the OVF inside. The Ubuntu Cloud image OVF is version 2
+(not sure what's going to happen since the OVF is clearly a wrapper for the VMDK larger VMDK) (Is it OVF v1? If so, this will need to be roundtripped out of Vagrant to get a v2 OVF.)
+
+
 This repo is two things. First, it's a VagrantFile which configures the base Ubuntu 14.04 box with an optimal WorPress distribution. Next, it's a Packer workflow which freezes that box so it can be used with other Vagrant workflows. 
 
 Packer runs the provisioners locally, which means that Ansible needs to  jump through some silly hoops before it can run. Indivually listing every role in the packer template is really tedious and easy to forget about until the build fails. 
 
+# TODO:
 
+* Remove VBoxGuestAdditions.iso and run a cleanup to zero space and reduce box size
+* set hostname
 
 
 
