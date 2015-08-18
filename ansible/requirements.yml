@@ -1,2 +1,3 @@
 ---
 - src: MaximeThoonsen.php5-xdebug
+  name: php5-xdebug

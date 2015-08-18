@@ -1,3 +1,10 @@
-#! /bin/bash
+#!/bin/bash -eux
 
-apt-get install -y ansible python-setuptools
+# Install Ansible repository.
+apt-get -y update && apt-get -y upgrade
+apt-get -y install software-properties-common
+apt-add-repository ppa:ansible/ansible
+
+# Install Ansible.
+apt-get -y update
+apt-get -y install ansible
