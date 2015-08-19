@@ -2,11 +2,14 @@
 
 - hosts: all
   sudo: yes
-  gather_facts: yes
 
   tasks: 
     - debug: "hello"
-  
-  # roles: 
-  #   - php
-  #   - php5-xdebug
+    
+    - name: install python-software-properties (required for apt-add-repository)
+      apt: pkg=python-software-properties state=installed update_cache=yes
+      
+  roles: 
+    - mysql
+    - php
+    - php5-xdebug

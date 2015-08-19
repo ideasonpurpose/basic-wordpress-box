@@ -1,4 +1,5 @@
-packer_cache/*
+packer_cache
 *.box
 iso/*
 ansible/galaxy
+.vagrant
