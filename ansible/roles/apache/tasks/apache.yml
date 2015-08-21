@@ -1,0 +1,14 @@
+---
+
+- name: install Apache
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items: 
+    - apache2
+
+- name: Set Apache's default umask to 0002 (g+w)
+  lineinfile: 
+    dest=/etc/apache2/envvars
+    regexp='^umask[ 0-9]+$'
+    line='umask 0002'
+    insertafter=EOF
+    state=present

@@ -4,24 +4,16 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/ansible.sh"
-    },
-    {
-      "type": "ansible-local",
-      "playbook_file": "ansible/main.yml",
-        "role_paths": [
-          "ansible/roles/php",
-          "ansible/galaxy/roles/php5-xdebug"
-        ]
-      }
-    ],
+    }
+  ],
   "builders": [
     {
       "type": "virtualbox-ovf",
-      "source_path": "iso/trusty-server-cloudimg-i386-vagrant-disk1/box.ovf",
+      "source_path": "iso/box.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "boot_wait": "10s",
-      "headless": false,
+      "headless": true,
       "ssh_wait_timeout": "300s",
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
       "vm_name": "packer-basic-wp-box",
@@ -33,7 +25,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-ubuntu1404.box",
+      "output": "builds/{{.Provider}}-basic-wp.box",
       "type": "vagrant"
     }
   ]

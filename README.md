@@ -14,9 +14,16 @@ This Vagrant box is just a zip file, so I extracted it to get to the OVF inside.
 
 This repo is two things. First, it's a VagrantFile which configures the base Ubuntu 14.04 box with an optimal WorPress distribution. Next, it's a Packer workflow which freezes that box so it can be used with other Vagrant workflows. 
 
-Packer is capable of provisioning, but it's kind of yucky. By building out hte initia. box with Ansible as any old Vagrant box, 
+Packer is capable of provisioning, but it's kind of yucky. By building out hte initia. box with Ansible as any old Vagrant box, mysql
 
 Packer runs the provisioners locally, which requires Ansible to jump through some annoying hoops before it can run. Individually listing every role in the packer template is really tedious and easy to forget about until the build fails. 
+
+## What's installed
+The bare minimum. No security considerations, just what's needed to get WordPres running. 
+
+* MySQL 5.5.44-0ubuntu0.14.04.1
+* PHP 5.5.28
+* Apache 2.4.16
 
 # TODO:
 
@@ -24,6 +31,17 @@ Packer runs the provisioners locally, which requires Ansible to jump through som
 * set hostname
 * Set a default wp-config.php file with overrides for `WP_HOME` and `WP_SITEURL` so pages won't redirect back to the real site. 
 * Autoload wp-content/mysql.sql if it exists. 
+
+
+After the first Vagrant up comes the stupid fragile step. I couldn't figure out how to set or override VirtualBox's Default Machine Folder, so the box needs to be fished out of there for Packer to run. 
+
+
+
+1. Run Vagrant up
+2. Vagrant halt
+3. VBoxManage export packer-base --ovf20 -o iso/box.ovf
+4. packer build template.json
+5. VBoxManage 
 
 
 

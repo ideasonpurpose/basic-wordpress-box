@@ -1,0 +1,19 @@
+---
+
+- name: Deactivate all existing virtualhosts
+  # command: a2dissite '*'
+  shell: rm -rf /etc/apache2/sites-enabled/*
+
+- name: Push our Apache Module virtual host
+  template: src=vhost.j2 dest=/etc/apache2/sites-available/{{ site_name }}.conf mode=0640
+
+- name: Activate our virtualhost
+  command: a2ensite {{ site_name }}
+  notify:
+    - restart apache
+
+# - name: Activate our virtualhost - Ubuntu 12 (Precise) and before
+#   command: a2ensite {{ site_name }}.conf
+#   when: ansible_distribution_major_version | int < 14
+#   notify:
+#     - restart apache

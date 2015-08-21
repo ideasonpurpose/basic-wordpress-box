@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    DocumentRoot {{ document_root }}
+
+    <directory {{ document_root }}>
+        Options All
+        AllowOverride all
+        Order allow,deny
+        Allow from all
+    </directory>
+
+    ErrorLog /var/log/apache2/error.log
+    TransferLog /var/log/apache2/access.log
+</VirtualHost>

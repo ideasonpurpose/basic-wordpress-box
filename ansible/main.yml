@@ -3,9 +3,10 @@
 - hosts: all
   sudo: yes
 
-  tasks: 
-    - debug: "hello"
-    
+  vars_files:
+    - defaults/main.yml
+
+  pre_tasks:     
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
       
@@ -13,3 +14,12 @@
     - mysql
     - php
     - php5-xdebug
+    - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress' }
+    
+  post_tasks:
+    
+    - name: Create default WordPress MySQL user
+      mysql_user: 'name={{ wp_config.db_user }} password={{ wp_config.db_password }} priv=*.*:ALL state=present'
+
+    - name: Create a new Database
+      mysql_db: name={{ wp_config.db_name }} state=present

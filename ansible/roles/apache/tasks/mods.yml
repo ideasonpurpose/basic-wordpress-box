@@ -1,0 +1,9 @@
+---
+- name: Install Apache mods
+  command: a2enmod {{ item }}
+  with_items:
+    - rewrite
+    - expires
+    - headers
+  notify:
+    - restart apache

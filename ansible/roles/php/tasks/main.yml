@@ -2,5 +2,5 @@
 
 - include: php.yml
 
-- include: composer.yml
-  when: install_composer
+# - include: composer.yml
+#   when: install_composer

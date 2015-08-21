@@ -1,0 +1,10 @@
+---
+
+# site_name is a nickname for the site, used to create directories
+site_name: '{{ ansible_hostname }}'
+
+# site_root is the directory containing all files used by a web site
+site_root: '/var/www/{{ site_name }}'
+
+# document_root is the entry point for the web site, eg. {{ site_root }}/laravel/public
+document_root: '{{ site_root }}/public'
