@@ -1,58 +1,44 @@
-A basic LAMP box configured for vanilla WordPress. Modeled after the basic evirnment at WP-Engine.
 
-Much of this was built from my [vagrant-dev-box](https://github.com/joemaller/vagrant-dev-box) project. The goal is to create a base box that can be spun up quickly from scratch and provide a stable, default WordPress environment for quick development. The environment was chosen to match WP-Engine's platform as closely as possible.
+# Basic WordPress Box
 
-The primary purpose of this project is to frontload configuration and provisioning as much as possible so a baseline box can be spun up quickly. 
+This project builds a basic LAMP box modeled after WP-Engine's platform and configured for vanilla WordPress installations. The output box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
-
-
-[Ubuntu's Cloud Images](http://cloud-images.ubuntu.com) were the base for this box. I built from the [Ubuntu Server 14.04 LTS (Trusty Tahr) daily build](http://cloud-images.ubuntu.com/vagrant/trusty/current/) because there's just no reason for me to be compiling this from scratch. I used the 32-bit version since this is going to be emulated with limited memory and nothing in WordPress is especially computationally taxing. There's just no reason to bother with 64-bit addressing for this. 
-
-This Vagrant box is just a zip file, so I extracted it to get to the OVF inside. The Ubuntu Cloud image OVF is version 2
-(not sure what's going to happen since the OVF is clearly a wrapper for the VMDK larger VMDK) (Is it OVF v1? If so, this will need to be roundtripped out of Vagrant to get a v2 OVF.)
+The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box which can be spun up quickly to provide a stable, default WordPress environment. 
 
 
-This repo is two things. First, it's a VagrantFile which configures the base Ubuntu 14.04 box with an optimal WorPress distribution. Next, it's a Packer workflow which freezes that box so it can be used with other Vagrant workflows. 
+## Install and Build
 
-Packer is capable of provisioning, but it's kind of yucky. By building out hte initia. box with Ansible as any old Vagrant box, mysql
+1. Clone this repo `git clone http://github.com/joemaller/.................`
+2. `cd basic-wordpress-box`
+3. Run `./build.sh`
+4. Upload the box to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
 
-Packer runs the provisioners locally, which requires Ansible to jump through some annoying hoops before it can run. Individually listing every role in the packer template is really tedious and easy to forget about until the build fails. 
+
+## More Information
+The base box is built on top of [Ubuntu Cloud Images'](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit iso. 
+
+
+This repo is two things. The initial box is build using Vagrant and an Ansible playbook to provision an optimal WordPress distribution. Next, it's a Packer workflow which freezes that box so it can be uploaded to Atlas and used for individual WordPress development.
 
 ## What's installed
-The bare minimum. No security considerations, just what's needed to get WordPres running. 
+The bare minimum. No security considerations, just what's needed to get WordPress running:
 
 * MySQL 5.5.44-0ubuntu0.14.04.1
 * PHP 5.5.28
 * Apache 2.4.16
 
-# TODO:
-
-* Remove VBoxGuestAdditions.iso and run a cleanup to zero space and reduce box size
-* set hostname
-* Set a default wp-config.php file with overrides for `WP_HOME` and `WP_SITEURL` so pages won't redirect back to the real site. 
-* Autoload wp-content/mysql.sql if it exists. 
-
-
-After the first Vagrant up comes the stupid fragile step. I couldn't figure out how to set or override VirtualBox's Default Machine Folder, so the box needs to be fished out of there for Packer to run. 
-
-
-
-1. Run Vagrant up
-2. Vagrant halt
-3. VBoxManage export packer-base --ovf20 -o iso/box.ovf
-4. packer build template.json
-5. VBoxManage 
-
-
-
-### Open Issues
-WP-Engine installs a slightly out-of-date copy of the [Force Strong Passwords]() plugin to `mu-plugins`. I'm not sure what to do about this. Installing the plugin normally on top of the mu-plugins copy throws a fatal error if activated. For now, the plugin is still in mu-plugins since WP-Engine will prevent deploying internally. 
-
 ### Acknowledgements
 
-I didn't figure this all out on my own. These were hugely helpful:
+While much of this was built from my [vagrant-dev-box](https://github.com/joemaller/vagrant-dev-box) project, I could never have figured this all out on my own. These projects were extremely helpful:
 
-* Jeff Geerling has posted a ton of examples to support his book, [... ...](#). This also drew heavily from his [Ubuntu 14.04 Packer example](https://github.com/geerlingguy/packer-ubuntu-1404)
+* Jeff Geerling has posted a ton of examples to support his book, [Ansible for DevOps](https://leanpub.com/ansible-for-devops). His [Ubuntu 14.04 Packer example](https://github.com/geerlingguy/packer-ubuntu-1404) was a great place to start from.
+* The awesome [Roots project](http://roots.io) continues to inspire.
+* HashiCorp's [atlas-packer-vagrant-tutorial](https://github.com/hashicorp/atlas-packer-vagrant-tutorial)  was also very instructive. 
 
-HashiCorp's [atlas-packer-vagrant-tutorial](https://github.com/hashicorp/atlas-packer-vagrant-tutorial)  was very instructive. 
 
+---
+
+##TODO: 
+add UseDNS no to /etc/ssh/ssh_config
+http://manpages.ubuntu.com/manpages/jaunty/en/man5/sshd_config.5.html
+http://superuser.com/a/62437/193584

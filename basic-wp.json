@@ -3,7 +3,12 @@
     {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/ansible.sh"
+      "script": "scripts/setup.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
     }
   ],
   "builders": [
@@ -25,8 +30,8 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-basic-wp.box",
-      "type": "vagrant"
+      "type": "vagrant",
+      "output": "builds/{{.Provider}}-basic-wp.box"
     }
   ]
 }

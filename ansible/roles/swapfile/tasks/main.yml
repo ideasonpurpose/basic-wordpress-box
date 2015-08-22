@@ -7,7 +7,7 @@
   file: path={{ swapfile_path }} owner=root group=root mode=0600
 
 - name: Format swapfile
-  command: mkswap {{ swap_file_path }}
+  command: mkswap {{ swapfile_path }}
 
 - name: Add swapfile to fstab
   mount: 

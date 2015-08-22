@@ -10,31 +10,10 @@
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
       
-    - set_fact: 
-        swapfile_path: /mnt/1024MiB.swap
-
-    - name: Create swapfile
-      command: fallocate -l 1024m {{ swapfile_path }} creates={{ swapfile_path }}
-    
-    - file: path={{ swapfile_path }} owner=root group=root mode=0600
-
-    - name: Mount swap
-      command: swapon {{ swapfile_path }} 
-      
-    - name: Add swapfile to fstab
-      mount: 
-        src={{ swapfile_path }}
-        fstype=swap
-        name=none
-        opts=sw
-        passno=0
-        dump=0
-        state=present
-
   roles: 
+    - swapfile
     - mysql
     - php
-    - php5-xdebug
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress' }
     
   post_tasks:
