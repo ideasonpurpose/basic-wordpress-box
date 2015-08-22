@@ -1,6 +1,8 @@
 
 # Basic WordPress Box
 
+This is just a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)
+
 This project builds a basic LAMP box modeled after WP Engine's platform and configured for vanilla WordPress installations. The output box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
 The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box which can be spun up quickly to provide a stable, default WordPress environment. 
@@ -8,7 +10,7 @@ The primary purpose of this project is to front-load as much boilerplate configu
 
 ## Install and Build
 
-1. Clone this repo `git clone http://github.com/joemaller/.................`
+1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
 3. Run `./build.sh`
 4. Upload the box to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
