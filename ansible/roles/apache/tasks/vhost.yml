@@ -11,9 +11,3 @@
   command: a2ensite {{ site_name }}
   notify:
     - restart apache
-
-# - name: Activate our virtualhost - Ubuntu 12 (Precise) and before
-#   command: a2ensite {{ site_name }}.conf
-#   when: ansible_distribution_major_version | int < 14
-#   notify:
-#     - restart apache

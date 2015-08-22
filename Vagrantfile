@@ -7,6 +7,9 @@ Vagrant.configure(2) do |config|
 
   config.vm.network "private_network", ip: "192.168.125.71"
 
+  # prevent key replacement for base builds
+  config.ssh.insert_key = false
+
   config.vm.provider "virtualbox" do |v|
 
     # Give VM access to all cpu cores on the host

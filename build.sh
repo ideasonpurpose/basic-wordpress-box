@@ -7,6 +7,6 @@
 
 vagrant up
 vagrant halt
-VBoxManage export packer-base --ovf20 -o iso/box.ovf
+VBoxManage export packer-base --ovf20 -o builds/basic-wp.ovf
 packer build basic-wp.json
 vagrant box add basic-wp builds/virtualbox-basic-wp.box

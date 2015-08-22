@@ -1,7 +1,7 @@
 
 # Basic WordPress Box
 
-This project builds a basic LAMP box modeled after WP-Engine's platform and configured for vanilla WordPress installations. The output box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
+This project builds a basic LAMP box modeled after WP Engine's platform and configured for vanilla WordPress installations. The output box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
 The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box which can be spun up quickly to provide a stable, default WordPress environment. 
 
@@ -26,6 +26,12 @@ The bare minimum. No security considerations, just what's needed to get WordPres
 * MySQL 5.5.44-0ubuntu0.14.04.1
 * PHP 5.5.28
 * Apache 2.4.16
+
+## What's Different from WP Engine?
+
+For starters, all PHP debugging and errors are enabled and visible. Even [XHProf](http://php.net/xhprof) is installed. Errors should never pass silently.
+(Unless explicitly silenced.)[*](https://www.python.org/dev/peps/pep-0020/) 
+
 
 ### Acknowledgements
 
