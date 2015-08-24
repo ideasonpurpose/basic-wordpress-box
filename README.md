@@ -43,10 +43,9 @@ While much of this was built from my [vagrant-dev-box](https://github.com/joemal
 * The awesome [Roots project](http://roots.io) continues to inspire.
 * HashiCorp's [atlas-packer-vagrant-tutorial](https://github.com/hashicorp/atlas-packer-vagrant-tutorial)  was also very instructive. 
 
+## About
 
----
+[![iop_logo](https://cloud.githubusercontent.com/assets/8320/9443542/944a8bce-4a4f-11e5-9d2f-54999b1687d5.png)][iop]  
+This project is sponsored by [Ideas On Purpose][iop]
 
-##TODO: 
-add UseDNS no to /etc/ssh/ssh_config
-http://manpages.ubuntu.com/manpages/jaunty/en/man5/sshd_config.5.html
-http://superuser.com/a/62437/193584
+[iop]: http://ideasonpurpose.com
