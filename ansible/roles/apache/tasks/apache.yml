@@ -1,6 +1,6 @@
 ---
 
-- name: install Apache
+- name: Install Apache
   apt: name={{ item }} state=installed update_cache=yes
   with_items: 
     - apache2

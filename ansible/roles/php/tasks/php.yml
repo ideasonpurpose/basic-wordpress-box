@@ -1,12 +1,13 @@
 ---
 
-- name: Add Ondřej Surý's PHP 5.5 ppa (https://launchpad.net/~ondrej)
+- name: Select PHP version https://launchpad.net/~ondrej
   set_fact: 
     # php5_ppa: 'ppa:ondrej/php5-oldstable' # php 5.4.x
     php5_ppa: 'ppa:ondrej/php5'             # PHP 5.5.x
     # php5_ppa: 'ppa:ondrej/php5-5.6'       # PHP 5.6.x
 
-- apt_repository: repo={{ php5_ppa }}
+- name: Add Ondřej Surý's PHP ppa
+  apt_repository: repo={{ php5_ppa }}
   
 - name: "Install PHP 5"
   apt: pkg={{ item }} state=installed update_cache=yes
