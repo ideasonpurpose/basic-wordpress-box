@@ -2,12 +2,15 @@
 
 - name: Create swapfile
   command: fallocate -l 1024m {{ swapfile_path }} creates={{ swapfile_path }}
+  register: create_swapfile
 
 - name: Set swapfile permissions
   file: path={{ swapfile_path }} owner=root group=root mode=0600
+  when: create_swapfile.changed
 
 - name: Format swapfile
   command: mkswap {{ swapfile_path }}
+  when: create_swapfile.changed
 
 - name: Add swapfile to fstab
   mount: 
@@ -18,6 +21,8 @@
     passno=0
     dump=0
     state=present
+  when: create_swapfile.changed
 
 - name: Mount swap
   command: swapon {{ swapfile_path }} 
+  when: create_swapfile.changed

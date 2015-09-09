@@ -26,6 +26,7 @@
         state=link
         src=/vagrant/site
         dest=/var/www/wordpress
+        force=yes
         owner=www-data 
         group=www-data
     
