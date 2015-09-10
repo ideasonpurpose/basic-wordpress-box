@@ -1,11 +1,10 @@
+*This project just builds a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)*
 
 # Basic WordPress Box
 
-This is just a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)
+This project builds a basic LAMP box modeled after WP Engine's platform and configured for vanilla WordPress installations. The output Vagrant box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
-This project builds a basic LAMP box modeled after WP Engine's platform and configured for vanilla WordPress installations. The output box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
-
-The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box which can be spun up quickly to provide a stable, default WordPress environment. 
+The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box with a stable, default WordPress environment which Vagrant can quickly spin up for local development.
 
 
 ## Install and Build
@@ -13,14 +12,14 @@ The primary purpose of this project is to front-load as much boilerplate configu
 1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
 3. Run `./build.sh`
-4. Upload the box to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
+4. Upload the output box to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
 
 
 ## More Information
 The base box is built on top of [Ubuntu Cloud Images'](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit iso. 
 
 
-This repo is two things. The initial box is build using Vagrant and an Ansible playbook to provision an optimal WordPress distribution. Next, it's a Packer workflow which freezes that box so it can be uploaded to Atlas and used for individual WordPress development.
+The initial box is built using Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple Packer workflow freezes that box so it can be uploaded to Atlas and used for individual WordPress development.
 
 ## What's installed
 The bare minimum. No security considerations, just what's needed to get WordPress running:
@@ -37,7 +36,7 @@ For starters, all PHP debugging and errors are enabled and visible. Even [XHProf
 
 ### Acknowledgements
 
-While much of this was built from my [vagrant-dev-box](https://github.com/joemaller/vagrant-dev-box) project, I could never have figured this all out on my own. These projects were extremely helpful:
+While much of this was built from my [vagrant-dev-box](https://github.com/joemaller/vagrant-dev-box) project, but these projects were extremely helpful:
 
 * Jeff Geerling has posted a ton of examples to support his book, [Ansible for DevOps](https://leanpub.com/ansible-for-devops). His [Ubuntu 14.04 Packer example](https://github.com/geerlingguy/packer-ubuntu-1404) was a great place to start from.
 * The awesome [Roots project](http://roots.io) continues to inspire.
@@ -46,6 +45,6 @@ While much of this was built from my [vagrant-dev-box](https://github.com/joemal
 ## About
 
 [![iop_logo](https://cloud.githubusercontent.com/assets/8320/9443542/944a8bce-4a4f-11e5-9d2f-54999b1687d5.png)][iop]  
-This project is sponsored by [Ideas On Purpose][iop]
+This project is sponsored by and used in production at [Ideas On Purpose][iop]
 
 [iop]: http://ideasonpurpose.com
