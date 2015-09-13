@@ -1,6 +1,6 @@
 ---
 - name: Install Apache mods
-  command: a2enmod {{ item }}
+  apache2_module: name={{ item }} state=present
   with_items:
     - rewrite
     - expires
