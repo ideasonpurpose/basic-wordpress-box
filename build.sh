@@ -5,6 +5,7 @@
 # steps are kind of self-explanatory
 #
 
+vagrant box update
 vagrant up
 vagrant halt
 rm -f builds/*.{ovf,vmdk}
