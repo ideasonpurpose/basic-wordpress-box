@@ -12,7 +12,7 @@ The primary purpose of this project is to front-load as much boilerplate configu
 1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
 3. Run `./build.sh`
-4. Upload the output box to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
+4. Upload the output box `basic-wp.ovf` to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
 
 
 ## More Information
