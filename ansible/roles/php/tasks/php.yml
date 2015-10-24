@@ -26,12 +26,16 @@
 - name: Generate error reporting INI -- no errors
   template: src=error_reporting_none.ini.j2 dest=/etc/php5/mods-available/error_reporting.ini
 
+- name: Increase maximum upload file size to 100 MB
+  template: src=upload_max.ini.j2 dest=/etc/php5/mods-available/upload_max.ini
+
 - name: Enable Mod INIs
   command: php5enmod {{ item }}
   with_items: 
     - mcrypt
     - timezone
     - error_reporting
+    - upload_max
     - xmlrpc
     - gd
 
