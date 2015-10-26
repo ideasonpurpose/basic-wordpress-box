@@ -6,7 +6,7 @@
 #
 
 vagrant box update
-vagrant up
+vagrant up --provision
 vagrant halt
 rm -f builds/*.{ovf,vmdk}
 VBoxManage export packer-base --ovf20 -o builds/basic-wp.ovf

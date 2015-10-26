@@ -1,7 +1,5 @@
 #!/bin/bash -eux
 
-apt-get update
-
 # Delete unneeded files.
 rm -f /home/vagrant/*.sh
 rm /home/vagrant/VBoxGuestAdditions.iso
