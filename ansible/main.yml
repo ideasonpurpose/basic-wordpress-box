@@ -12,17 +12,15 @@
       
   roles: 
     - swapfile
-    - config
+    # - config
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
     - ansible
     - php
     - mysql
+    - clean_ubuntu
     
   post_tasks:
-    
-    - name: Clean out /var/www
-      file: path=/var/www/html state=absent
-      
+
     - name: Setup default wordpress symlink
       file: 
         state=link

@@ -1,4 +1,0 @@
----
-
-- name: Make Vim the default editor
-  shell: update-alternatives --set editor /usr/bin/vim.basic
