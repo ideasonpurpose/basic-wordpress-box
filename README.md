@@ -2,10 +2,11 @@
 
 # Basic WordPress Box
 
-This project builds a basic LAMP box modeled after WP Engine's platform and configured for vanilla WordPress installations. The output Vagrant box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
+This project builds a basic LAMP box configured for vanilla WordPress installations and modeled after managed WordPress hosting platforms like WP Engine or Flywheel. The output Vagrant box is available on Hashicorp's Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
 The primary purpose of this project is to front-load as much boilerplate configuration as possible, producing a clean base box with a stable, default WordPress environment which Vagrant can quickly spin up for local development.
 
+For a complete, fast-to-spin-up local WordPress development environment based on this box, take a look at [Basic WordPress Vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant).
 
 ## Install and Build
 
@@ -18,8 +19,7 @@ The primary purpose of this project is to front-load as much boilerplate configu
 ## More Information
 The base box is built on top of [Ubuntu Cloud Images'](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit iso. 
 
-
-The initial box is built using Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple Packer workflow freezes that box so it can be uploaded to Atlas and used for individual WordPress development.
+The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple Packer workflow freezes that box so it can be uploaded to Atlas and used for individual WordPress development.
 
 ## What's installed
 The bare minimum. No security considerations, just what's needed to get WordPress running:
@@ -28,11 +28,17 @@ The bare minimum. No security considerations, just what's needed to get WordPres
 * PHP 5.5.28
 * Apache 2.4.16
 
-## What's Different from WP Engine?
+Man pages, locales and docs have all be stripped out
+
+## What's Different?
 
 For starters, all PHP debugging and errors are enabled and visible. Even [XHProf](http://php.net/xhprof) is installed. Errors should never pass silently.
 (Unless explicitly silenced.)[*](https://www.python.org/dev/peps/pep-0020/) 
 
+### Local Testing
+The build script will add the newly generated box to vagrant with the name `basic-wp`. To test locally, just reference the box in a Vagrant file or run this: 
+
+    $ vagrant init basic-wp
 
 ### Acknowledgements
 
