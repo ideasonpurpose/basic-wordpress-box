@@ -5,6 +5,9 @@ $boxname = "packer-base"
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty32"
 
+  # disable vagrant-hostmanager if it's installed
+  config.hostmanager.enabled = false if Vagrant.has_plugin? 'vagrant-hostmanager'
+
   # prevent key replacement for base builds
   config.ssh.insert_key = false
 
@@ -28,3 +31,4 @@ Vagrant.configure(2) do |config|
   end
 
 end
+

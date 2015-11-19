@@ -13,7 +13,7 @@ For a complete, fast-to-spin-up local WordPress development environment based on
 1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
 3. Run `./build.sh`
-4. Upload the output box `basic-wp.ovf` to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
+4. Upload the output box `virtualbox-basic-wp.box` to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
 
 
 ## More Information
