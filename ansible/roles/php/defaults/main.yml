@@ -1,7 +1,9 @@
 ---
 
-php_debug: false
-
 php_error_reporting: E_ALL
 
 php_timezone: America/New_York
+
+php_max_execution_time: 1800
+
+php_max_filesize: 100M
