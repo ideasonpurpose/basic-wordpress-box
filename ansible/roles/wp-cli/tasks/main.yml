@@ -1,0 +1,12 @@
+---
+  
+  - name: Download and install wp-cli.phar
+    get_url:
+      url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+      dest=/usr/local/bin/wp
+      force=yes
+  
+  - name: set wp-cli permissions
+    file: 
+      path=/usr/local/bin/wp
+      mode=0755

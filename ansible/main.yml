@@ -12,11 +12,11 @@
       
   roles: 
     - swapfile
-    # - config
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
     - ansible
     - php
     - mysql
+    - wp-cli
     - clean_ubuntu
     
   post_tasks:
