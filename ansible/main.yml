@@ -10,6 +10,9 @@
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
       
+    - name: Add vagrant user to www-data group
+      shell: usermod -a -G www-data vagrant
+      
   roles: 
     - swapfile
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
@@ -20,7 +23,6 @@
     - clean_ubuntu
     
   post_tasks:
-
     - name: Setup default wordpress symlink
       file: 
         state=link
