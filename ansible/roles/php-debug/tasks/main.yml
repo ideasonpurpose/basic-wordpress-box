@@ -1,5 +1,0 @@
----
-
-- include: opcache-disable.yml
-- include: php-debug.yml
-- include: xhprof.yml
