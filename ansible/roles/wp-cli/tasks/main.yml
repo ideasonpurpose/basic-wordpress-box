@@ -10,3 +10,9 @@
     file: 
       path=/usr/local/bin/wp
       mode=0755
+
+  - name: Write ~/.wp-cli/config.yml file
+    template: 
+      src=config.yml.j2 
+      dest=/home/vagrant/.wp-cli/config.yml
+      mode=755
