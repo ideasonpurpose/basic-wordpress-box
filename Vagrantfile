@@ -5,8 +5,6 @@ $boxname = "packer-base"
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty32"
 
-  config.vm.network "private_network", ip: "192.168.125.71"
-
   # prevent key replacement for base builds
   config.ssh.insert_key = false
 
