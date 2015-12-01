@@ -4,7 +4,7 @@
 # Build script for the basic-wordpress-box
 # steps are kind of self-explanatory
 #
-
+set -e
 vagrant box update
 vagrant up --provision
 vagrant halt
