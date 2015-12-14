@@ -3,14 +3,16 @@
 - name: Select PHP version https://launchpad.net/~ondrej
   set_fact: 
     # php5_ppa: 'ppa:ondrej/php5-oldstable' # php 5.4.x
-    php5_ppa: 'ppa:ondrej/php5'             # PHP 5.5.x
-    # php5_ppa: 'ppa:ondrej/php5-5.6'       # PHP 5.6.x
+    # php_ppa: 'ppa:ondrej/php5'            # PHP 5.5.x
+    # php_ppa: 'ppa:ondrej/php5-5.6'        # PHP 5.6.x
+    php_ppa: 'ppa:ondrej/php-7.0'           # PHP 7.0.x
 
 - name: Add Ondřej Surý's PHP ppa
-  apt_repository: repo={{ php5_ppa }}
+  apt_repository: repo={{ php_ppa }}
   
 - name: "Install PHP 5"
   apt: pkg={{ item }} state=installed update_cache=yes
+  when: "'php5' in php_ppa"
   with_items:
     - php5
     - php5-cli
@@ -20,20 +22,35 @@
     - php5-xmlrpc
     - php5-gd
 
+- name: "Install PHP 7"
+  apt: pkg={{ item }} state=installed update_cache=yes
+  when: "'php5' not in php_ppa"
+  with_items:
+    - php7.0
+    - php7.0-cli
+    - php7.0-curl
+    - php7.0-mysql
+    - php7.0-mcrypt
+    - php7.0-gd
+    # - php7.0-xmlrpc  # now built in with PHP7?
+
+- set_fact:
+    php_dirname: "{{ ('php5' in php_ppa) | ternary('php5', 'php') }}"
+  
 - name: Write INI for default time zone
-  template: src=timezone.ini.j2 dest=/etc/php5/mods-available/timezone.ini
+  template: src=timezone.ini.j2 dest=/etc/{{ php_dirname }}/mods-available/timezone.ini
 
 - name: Generate error reporting INI -- no errors
-  template: src=error_reporting_none.ini.j2 dest=/etc/php5/mods-available/error_reporting.ini
+  template: src=error_reporting_none.ini.j2 dest=/etc/{{ php_dirname }}/mods-available/error_reporting.ini
 
 - name: Set upload_max_filesize
-  template: src=upload_max_filesize.ini.j2 dest=/etc/php5/mods-available/upload_max_filesize.ini
+  template: src=upload_max_filesize.ini.j2 dest=/etc/{{ php_dirname }}/mods-available/upload_max_filesize.ini
 
 - name: Set max_execution_time
-  template: src=max_execution_time.ini.j2 dest=/etc/php5/mods-available/max_execution_time.ini
+  template: src=max_execution_time.ini.j2 dest=/etc/{{ php_dirname }}/mods-available/max_execution_time.ini
 
 - name: Enable Mod INIs
-  command: php5enmod {{ item }}
+  command: "{{ ('php5' in php_ppa) | ternary('php5enmod', 'phpenmod') }} {{ item }}"
   with_items: 
     - mcrypt
     - timezone
@@ -43,12 +60,5 @@
     - xmlrpc
     - gd
 
-- name: Remove php5 repo (clean up)
-  apt_repository: repo={{ php5_ppa }} state=absent
-
-# - name: Enable Apache2 PHP module
-#   command: a2enmod {{ item }}
-#   with_items:
-#     - php5
-  # notify:
-  #   - restart apache
+- name: Remove php ppa repo (clean up)
+  apt_repository: repo={{ php_ppa }} state=absent
