@@ -9,10 +9,19 @@
   pre_tasks:     
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
-      
+
     - name: Add vagrant user to www-data group
-      shell: usermod -a -G www-data vagrant
-      
+      user:
+        name=vagrant
+        groups=www-data
+        append=yes
+
+    - name: Add www-data user to vagrant group ¯\_(ツ)_/¯
+      user:
+        name=www-data
+        groups=vagrant
+        append=yes
+
   roles: 
     - swapfile
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
