@@ -1,8 +1,15 @@
 ---
 
+- name: Collect existing virtualhosts
+  shell: ls -1 /etc/apache2/sites-enabled/
+  register: vhosts
+    
 - name: Deactivate all existing virtualhosts
   # command: a2dissite '*'
-  shell: rm -rf /etc/apache2/sites-enabled/*
+  file: 
+    path=/etc/apache2/sites-enabled/{{ item }}
+    state=absent
+  with_items: '{{ vhosts.stdout_lines }}'
 
 - name: Push our Apache Module virtual host
   template: src=vhost.j2 dest=/etc/apache2/sites-available/{{ site_name }}.conf mode=0640

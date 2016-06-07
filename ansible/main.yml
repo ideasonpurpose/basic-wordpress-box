@@ -6,7 +6,12 @@
   vars_files:
     - defaults/main.yml
 
-  pre_tasks:     
+  pre_tasks:
+    - name: Disable apt's cache
+      copy:
+        content='Dir::Cache { srcpkgcache ""; pkgcache ""; }'
+        dest=/etc/apt/apt.conf.d/02nocache
+
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
 

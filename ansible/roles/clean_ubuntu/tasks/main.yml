@@ -12,8 +12,21 @@
     - puppet
     - vim-common
     - x11-common
+    - poppler-data
+    - netcat-openbsd
+    - tasksel
 
-- name: Thin unused files and directories
+- name: Clear the apt cache
+  shell: apt-get clean -y
+
+# This triggers a deprecation warning, but I couldn't get Ansible's
+# v2.1 module syntax to run without failing with this Module Error:
+#     TypeError: 'NoneType' object is not iterable
+# http://docs.ansible.com/ansible/apt_module.html#options
+- name: Remove apt leftovers and orphans (apt-get autoremove -y)
+  shell: apt-get autoremove -y
+
+- name: Thin unused files and directories in /usr/share
   file: path={{ item }} state=absent
   with_items:
     - /usr/share/bash-completion
@@ -21,20 +34,26 @@
     - /usr/share/info
     - /usr/share/locale
     - /usr/share/man
+    - /usr/share/lintian
     - /usr/share/vim
-    - /usr/share/X11
-    - /var/cache/apt-xapian-index
-    - /var/cache/chef
-    - /var/cache/man
-
+    - /usr/share/X11    
+    
 # Something in the VirtualBox Guest Additions requires some unknown directory in
 # /usr/share/doc. Shared folders will fail to mount without it. So, we can remove
 # all the files to shrink the disk image, but we can't remove the empty directories
 - name: Remove all files from /usr/share/doc
   shell: find /usr/share/doc -type f -delete
 
-- name: Remove apt leftovers and orphans
-  shell: apt-get autoremove -y
+- name: Collect caches
+  shell: ls -1 /var/cache
+  register: cache
 
-- name: Clear the apt cache
-  shell: apt-get clean -y
+- name: Empty /var/cache
+  file: 
+    path=/var/cache/{{ item }}
+    state=absent
+  with_items: '{{ cache.stdout_lines }}'
+
+
+- name: Remove all /usr/**/*.pyc files
+  shell: find /usr -name *.pyc -delete
