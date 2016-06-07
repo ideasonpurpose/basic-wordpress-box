@@ -13,12 +13,14 @@
   apt: pkg={{ item }} state=installed update_cache=yes
   with_items:
     - php5
+    - php5-common
     - php5-cli
     - php5-curl
     - php5-mysql
     - php5-mcrypt
     - php5-xmlrpc
     - php5-gd
+    - php5-imagick
 
 - name: Write INI for default time zone
   template: src=timezone.ini.j2 dest=/etc/php5/mods-available/timezone.ini
@@ -42,6 +44,7 @@
     - max_execution_time
     - xmlrpc
     - gd
+    - imagick
 
 - name: Remove php5 repo (clean up)
   apt_repository: repo={{ php5_ppa }} state=absent
