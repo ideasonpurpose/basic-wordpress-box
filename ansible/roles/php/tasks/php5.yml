@@ -34,12 +34,19 @@
 - name: Set max_execution_time
   template: src=max_execution_time.ini.j2 dest=/etc/php5/mods-available/max_execution_time.ini
 
+- name: Disable Opcache
+  copy:
+    src=disable_opcache.ini
+    dest=/etc/php5/mods-available/disable_opcache.ini
+    mode=0644
+
 - name: Enable Mod INIs
   command: php5enmod {{ item }}
   with_items:
     - mcrypt
     - timezone
     - error_reporting
+    - disable_opcache
     - upload_max_filesize
     - max_execution_time
     - xmlrpc
