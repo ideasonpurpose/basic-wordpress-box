@@ -15,6 +15,11 @@
     - name: install python-software-properties (required for apt-add-repository)
       apt: pkg=python-software-properties state=installed update_cache=yes
 
+    - name: install unzip (for local provisioning on the VM)
+      apt:
+        pkg=unzip
+        state=installed
+
     - name: Add vagrant user to www-data group
       user:
         name=vagrant
