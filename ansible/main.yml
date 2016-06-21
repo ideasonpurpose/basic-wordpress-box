@@ -34,6 +34,7 @@
 
   roles: 
     - swapfile
+    - virtualbox
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
     - ansible
     - php
