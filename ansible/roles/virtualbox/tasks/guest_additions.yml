@@ -1,0 +1,72 @@
+---
+# Thanks to:
+#     http://unix.stackexchange.com/questions/31899
+#     https://www.vagrantup.com/docs/virtualbox/boxes.html#to-install-via-the-command-line
+
+- name: Remove Default VirtualBox Guest Additions
+  apt:
+    name: '{{ item }}'
+    autoremove: yes
+    state: absent
+    purge: yes
+  with_items:
+    - virtualbox-guest-dkms
+    - virtualbox-guest-utils
+    - virtualbox-guest-x11
+
+- name: Install build-essentials to compile Guest Additions
+  apt:
+    name: build-essential
+    update_cache: yes
+    state: installed
+
+- name: Fetch Current VirtualBox version
+  uri: 
+    url: http://download.virtualbox.org/virtualbox/LATEST.TXT
+    return_content: yes
+  register: vbox_latest
+  
+- name: Download Guest Additions ISO
+  get_url: 
+    url: http://download.virtualbox.org/virtualbox/{{ vbox_latest.content | trim }}/VBoxGuestAdditions_{{ vbox_latest.content | trim }}.iso
+    dest: /tmp/VBoxGuestAdditions.iso
+  register: iso
+
+- name: Mount the Guest Additions ISO
+  mount: 
+    name: /media/VBoxGuestAdditions
+    src: '{{ iso.dest }}'
+    fstype: iso9660
+    opts: async,exec,ro,noauto
+    state: mounted
+    
+- name: Install Guest Additions
+  shell: /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
+
+- name: Unmount Guest Additions ISO
+  mount:
+    name: /media/VBoxGuestAdditions
+    src: none
+    fstype: iso9660
+    state: unmounted
+
+- name: Remove ISO and Mount point
+  file: 
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - /media/VBoxGuestAdditions
+    - '{{ iso.dest }}'
+
+- name: Remove mount point record from /etc/fstab
+  lineinfile: 
+    dest: /etc/fstab
+    regexp: '^/tmp/VBoxGuestAdditions.iso.*$'
+    state: absent
+
+- name: Remove build-essentials (cleaning up)
+  apt:
+    name: build-essential
+    autoremove: yes
+    state: absent
+    purge: yes
