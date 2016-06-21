@@ -16,9 +16,6 @@
     - netcat-openbsd
     - tasksel
 
-- name: Clear the apt cache
-  shell: apt-get clean -y
-
 # This triggers a deprecation warning, but I couldn't get Ansible's
 # v2.1 module syntax to run without failing with this Module Error:
 #     TypeError: 'NoneType' object is not iterable
@@ -54,6 +51,15 @@
     state=absent
   with_items: '{{ cache.stdout_lines }}'
 
+- name: Collect apt lists
+  shell: ls -1 /var/lib/apt/lists/
+  register: var_lib_apt
+
+- name: Clean out /var/lib/apt/lists
+  file:
+    path: '/var/lib/apt/lists/{{ item }}'
+    state: absent
+  with_items: '{{ var_lib_apt.stdout_lines }}'
 
 - name: Remove all /usr/**/*.pyc files
   shell: find /usr -name *.pyc -delete
