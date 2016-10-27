@@ -8,7 +8,8 @@ set -e    # script should exit on error
 vagrant box update
 vagrant up --provision
 vagrant halt
-rm -f builds/*.{ovf,vmdk}
-VBoxManage export packer-base --ovf20 -o builds/basic-wp.ovf
+mkdir -p box
+rm -f box/*.{ovf,vmdk}
+VBoxManage export packer-base --ovf20 -o box/basic-wp.ovf
 packer build basic-wp.json
-vagrant box add --force basic-wp builds/virtualbox-basic-wp.box
+vagrant box add --force basic-wp box/virtualbox-basic-wp.box
