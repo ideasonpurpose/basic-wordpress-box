@@ -25,6 +25,7 @@ The initial build uses Vagrant and Ansible to provision an optimal WordPress dis
 The bare minimum. No security considerations, just what’s needed to get WordPress running and a few helpful extras:
 
 * MySQL 5.5.x
+  * Query Cache disabled
 * PHP 5.5.x
   * all Errors visible
   * 30 minute max_execution_time
@@ -39,7 +40,7 @@ Man pages, locales and docs have all been stripped out to help shrink the size o
 
 For starters, all PHP debugging and errors are enabled and visible. Even [XHProf](http://php.net/xhprof) is installed. Errors should never pass silently. ([Unless explicitly silenced.](https://www.python.org/dev/peps/pep-0020/))
 
-[WP-CLI](http://wp-cli.org/) is also available. It's proven userful for tweaking settings and speeding development. 
+[WP-CLI](http://wp-cli.org/) is also available. It's proven useful for tweaking settings and speeding development.
 
 ### Local Testing
 The build script will add the newly generated box to vagrant with the name `basic-wp`. To test locally, just reference the box in a Vagrantfile or run this:

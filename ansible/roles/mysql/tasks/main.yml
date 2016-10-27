@@ -9,6 +9,22 @@
 - set_fact:
     mysql_root_password: "password"
 
+- name: disable query cache (query_cache_size)
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: '^query_cache_size\s+=.+$'
+    line: 'query_cache_size        = 0'
+    insertafter: '^query_cache_limit'
+    state: present
+
+- name: disable query cache (query_cache_type)
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: '^query_cache_type\s+=.+$'
+    line: 'query_cache_type        = 0'
+    insertafter: '^query_cache_size\s+=.+$'
+    state: present
+
 - service: name=mysql state=started
 
 - name: update mysql root password for all root accounts
