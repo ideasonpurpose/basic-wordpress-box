@@ -1,3 +1,4 @@
 ---
 
-- include: php5.yml
+- include: php.yml
+- include: php-debug.yml

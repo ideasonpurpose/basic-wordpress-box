@@ -14,7 +14,7 @@
   "builders": [
     {
       "type": "virtualbox-ovf",
-      "source_path": "builds/basic-wp.ovf",
+      "source_path": "box/basic-wp.ovf",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "boot_wait": "10s",
@@ -32,7 +32,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "builds/{{.Provider}}-basic-wp.box"
+      "output": "box/{{.Provider}}-basic-wp.box"
     }
   ]
 }

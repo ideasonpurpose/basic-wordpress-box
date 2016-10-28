@@ -1,0 +1,65 @@
+---
+
+- name: Add Ondřej Surý's PHP ppa https://launchpad.net/~ondrej
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+
+- name: "Install PHP"
+  apt: 
+    pkg: '{{ item }}'
+    state: installed
+    update_cache: yes
+  with_items:
+    - php{{ php_version }}
+    - php{{ php_version }}-cli
+    - php{{ php_version }}-common
+    - php{{ php_version }}-curl
+    - php{{ php_version }}-gd
+    - php{{ php_version }}-imagick
+    - php{{ php_version }}-mcrypt
+    - php{{ php_version }}-mysql
+    - php{{ php_version }}-xmlrpc
+
+- name: Write INI for default time zone
+  template: 
+    src: timezone.ini.j2
+    dest: /etc/php/{{ php_version }}/mods-available/timezone.ini
+
+- name: Generate error reporting INI -- no errors
+  template: 
+    src: error_reporting_none.ini.j2
+    dest: /etc/php/{{ php_version }}/mods-available/error_reporting.ini
+
+- name: Set upload_max_filesize
+  template: 
+    src: upload_max_filesize.ini.j2
+    dest: /etc/php/{{ php_version }}/mods-available/upload_max_filesize.ini
+
+- name: Set max_execution_time
+  template: 
+    src: max_execution_time.ini.j2
+    dest: /etc/php/{{ php_version }}/mods-available/max_execution_time.ini
+
+- name: Disable Opcache
+  copy:
+    src: disable_opcache.ini
+    dest: /etc/php/{{ php_version }}/mods-available/disable_opcache.ini
+    mode: 0644
+
+- name: Enable Mod INIs
+  command: phpenmod {{ item }}
+  with_items:
+    - mcrypt
+    - timezone
+    - error_reporting
+    - disable_opcache
+    - upload_max_filesize
+    - max_execution_time
+    - xmlrpc
+    - gd
+    - imagick
+
+- name: Remove php repo (clean up)
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+    state: absent

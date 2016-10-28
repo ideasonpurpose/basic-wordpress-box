@@ -1,17 +1,31 @@
 ---
 
-- name: "Install PHP 5 Debugging Tools"
-  apt: pkg={{ item }} state=installed update_cache=yes
+- name: Add Ondřej Surý's PHP ppa https://launchpad.net/~ondrej
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+
+- name: "Install PHP Debugging Tools"
+  apt: 
+    pkg: '{{ item }}'
+    state: installed 
+    update_cache: yes
   with_items:
-    - php5-xdebug
+    - php-xdebug
+  # notify:
+  #   - remove php ppa
 
 - name: Write error reporting INI
   copy:
-    src=error_reporting_all.ini
-    dest=/etc/php5/mods-available/error_reporting.ini
-    mode=0644
+    src: error_reporting_all.ini
+    dest: /etc/php/{{ php_version }}/mods-available/error_reporting.ini
+    mode: 0644
 
 - name: Enable PHP error reporting INI
-  command: php5enmod error_reporting
+  command: phpenmod error_reporting
   notify:
     - restart apache
+
+- name: Remove php repo (clean up)
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+    state: absent
