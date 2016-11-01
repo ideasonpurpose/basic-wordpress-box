@@ -24,13 +24,14 @@ The initial build uses Vagrant and Ansible to provision an optimal WordPress dis
 ## What’s installed
 The bare minimum. No security considerations, just what’s needed to get WordPress running and a few helpful extras:
 
-* MySQL 5.5.x
-  * Query Cache disabled
-* PHP 5.5.x
-  * all Errors visible
+* Apache 2.4.x
+* PHP 7.0.x
+  * All Errors visible
   * 30 minute max_execution_time
   * 100 MB max_upload_filesize
-* Apache 2.4.x
+* MySQL 5.5.x
+  * Query Cache disabled
+* Debugging tools: [Kint][], [xDebug][] and [Tideways][]/[XHProf][]
 * [wp-cli](http://wp-cli.org/)
 * PHP-GD and PHP-Imagick ([GD][] and [ImageMagick][])
 
@@ -61,7 +62,7 @@ To generate updated versions of the basic-wp box, the following tools should be 
 
 * [VirtualBox][]
 * [Vagrant][]
-* [Ansible][] (v2 or greater)
+* [Ansible][] (v2 or greater, or [run from source](http://docs.ansible.com/ansible/intro_installation.html#running-from-source))
 * [Packer][]
 
 VirtualBox and Vagrant are downloads, Ansible and Packer are command-line tools and can be installed with a package manager. On a Mac, use homebrew: `brew install ansible packer`
@@ -87,3 +88,7 @@ This project is sponsored by and used in production at [Ideas On Purpose][iop]
 [vagrant]: https://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
 [ansible]: http://docs.ansible.com/
+[kint]: http://raveren.github.io/kint/
+[xdebug]: https://xdebug.org/docs/
+[xhprof]: http://php.net/xhprof
+[tideways]: https://tideways.io/profiler/xhprof-for-php7-php5.6
