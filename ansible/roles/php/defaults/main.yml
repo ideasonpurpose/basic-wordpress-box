@@ -10,4 +10,4 @@ php_max_filesize: 100M
 
 # This should match a Major.minor PHP version. eg. 5.6, 7.0, 7.1
 # https://launchpad.net/~ondrej/+archive/ubuntu/php
-php_version: 5.6
+php_version: 7.0

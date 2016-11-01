@@ -1,0 +1,43 @@
+---
+
+- name: Add Ondřej Surý's PHP ppa https://launchpad.net/~ondrej
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+
+- name: "Install Tideways and GraphViz"
+  apt: 
+    pkg: '{{ item }}'
+    state: installed
+    update_cache: yes
+  with_items:
+    - php-tideways
+    - graphviz
+
+- name: Make sure /var/www/lib/xhprof exists
+  file:
+    path: /var/www/lib/xhprof
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+  register: var_www_lib_xhprof
+
+- name: Extract Kint archive on remote host ONE STEP
+  unarchive: 
+    src: 'https://github.com/phacility/xhprof/archive/master.zip'
+    dest: '{{ var_www_lib_xhprof.path }}'
+    remote_src: yes
+
+- name: Write Tideways mod INI
+  copy:
+    src: tideways.ini
+    dest: /etc/php/{{ php_version }}/mods-available/tideways.ini
+    mode: 0644
+
+- name: Enable Tideways INI
+  command: phpenmod tideways
+
+- name: Remove php repo (clean up)
+  apt_repository: 
+    repo: 'ppa:ondrej/php'
+    state: absent

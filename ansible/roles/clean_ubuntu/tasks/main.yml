@@ -11,7 +11,7 @@
     - chef
     - puppet
     - vim-common
-    - x11-common
+    # - x11-common  # removing this also removes GraphViz -- oops. 
     - poppler-data
     - netcat-openbsd
     - tasksel

@@ -1,0 +1,19 @@
+---
+
+- name: Make sure /var/www/lib/kint exists
+  file:
+    path: /var/www/lib/kint
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+  register: var_www_lib_kint
+
+- name: Extract Kint archive on remote host
+  unarchive: 
+    src: 'https://github.com/raveren/kint/archive/master.zip'
+    dest: '{{ var_www_lib_kint.path }}'
+    # owner: www-data
+    # group: www-data
+    # mode: 0755
+    remote_src: yes
