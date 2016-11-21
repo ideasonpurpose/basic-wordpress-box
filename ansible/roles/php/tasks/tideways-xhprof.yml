@@ -37,6 +37,12 @@
 - name: Enable Tideways INI
   command: phpenmod tideways
 
+- name: XHProf cleanup cron command every 10 minutes
+  cron:
+    name: "Keep only last 10 XHProf jobs"
+    minute: '*/10'
+    job: "ls -tp /tmp/*.xhprof | grep -v '/$' | tail -n +10 | xargs -I {} sudo rm -- {}"
+
 - name: Remove php repo (clean up)
   apt_repository: 
     repo: 'ppa:ondrej/php'
