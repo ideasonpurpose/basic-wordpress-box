@@ -9,6 +9,7 @@ The primary design goal of this project is to front-load as much boilerplate con
 [Basic WordPress Vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant) is a complete, fast-to-spin-up local WordPress development environment based on this box.
 
 ## Install and Build
+Please use the latest [Ansible development checkout][ansible-dev] to build boxes.
 
 1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
@@ -62,7 +63,7 @@ To generate updated versions of the basic-wp box, the following tools should be 
 
 * [VirtualBox][]
 * [Vagrant][]
-* [Ansible][] (v2 or greater, or [run from source](http://docs.ansible.com/ansible/intro_installation.html#running-from-source))
+* [Ansible][] (v2 or greater, or [run from source][ansible-dev])
 * [Packer][]
 
 VirtualBox and Vagrant are downloads, Ansible and Packer are command-line tools and can be installed with a package manager. On a Mac, use homebrew: `brew install ansible packer`
@@ -88,6 +89,7 @@ This project is sponsored by and used in production at [Ideas On Purpose][iop]
 [vagrant]: https://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
 [ansible]: http://docs.ansible.com/
+[ansible-dev]: http://docs.ansible.com/ansible/intro_installation.html#running-from-source
 [kint]: http://raveren.github.io/kint/
 [xdebug]: https://xdebug.org/docs/
 [xhprof]: http://php.net/xhprof
