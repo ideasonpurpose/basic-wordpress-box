@@ -1,10 +1,10 @@
 ---
 
-- name: Install Python MySQL library
+- name: 'Install Python MySQL library (required by Ansible http://docs.ansible.com/ansible/mysql_db_module.html)'
   apt: name=python-mysqldb update_cache=yes
 
 - name: install MySQL-server 
-  apt: name=mysql-server
+  apt: name=mysql-server-5.6
 
 - set_fact:
     mysql_root_password: "password"

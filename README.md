@@ -29,7 +29,7 @@ The bare minimum. No security considerations, just what’s needed to get WordPr
   * All Errors visible
   * 30 minute max_execution_time
   * 100 MB max_upload_filesize
-* MySQL 5.5.x
+* MySQL 5.6.x
   * Query Cache disabled
 * Debugging tools: [Kint][], [xDebug][] and [Tideways][]/[XHProf][]
 * [wp-cli](http://wp-cli.org/)
