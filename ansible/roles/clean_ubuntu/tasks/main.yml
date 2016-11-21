@@ -46,9 +46,9 @@
   register: cache
 
 - name: Empty /var/cache
-  file: 
-    path=/var/cache/{{ item }}
-    state=absent
+  file:
+    path: '/var/cache/{{ item }}'
+    state: absent
   with_items: '{{ cache.stdout_lines }}'
 
 - name: Collect apt lists
@@ -60,6 +60,3 @@
     path: '/var/lib/apt/lists/{{ item }}'
     state: absent
   with_items: '{{ var_lib_apt.stdout_lines }}'
-
-- name: Remove all /usr/**/*.pyc files
-  shell: find /usr -name *.pyc -delete
