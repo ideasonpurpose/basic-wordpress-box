@@ -1,6 +1,7 @@
 *This project just builds a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)*
 
 # Basic WordPress Box
+##### Version 1.2.0
 
 This project builds a basic LAMP box configured for vanilla WordPress installations and modeled after managed WordPress hosting platforms like WP Engine or Flywheel. The generated Vagrant box is available on Hashicorp’s Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
@@ -44,7 +45,7 @@ For starters, all PHP debugging and errors are enabled and visible. Even [XHProf
 
 [WP-CLI](http://wp-cli.org/) is also available. It's proven useful for tweaking settings and speeding development.
 
-### Local Testing
+## Local Testing
 The build script will add the newly generated box to vagrant with the name `basic-wp`. To test locally, just reference the box in a Vagrantfile or run this:
 
     $ vagrant init basic-wp
@@ -58,7 +59,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "basic-wp"
 ```
 
-### Development Requirements
+## Development Requirements
 To generate updated versions of the basic-wp box, the following tools should be installed: 
 
 * [VirtualBox][]
@@ -68,7 +69,7 @@ To generate updated versions of the basic-wp box, the following tools should be 
 
 VirtualBox and Vagrant are downloads, Ansible and Packer are command-line tools and can be installed with a package manager. On a Mac, use homebrew: `brew install ansible packer`
 
-### Acknowledgements
+## Acknowledgements
 
 While much of this was built from my earlier [vagrant-dev-box](https://github.com/joemaller/vagrant-dev-box) project, the following projects were extremely helpful:
 
