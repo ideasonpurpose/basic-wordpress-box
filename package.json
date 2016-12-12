@@ -1,0 +1,50 @@
+{
+  "name": "basic-wordpress-box",
+  "version": "0.0.6",
+  "description": "A basic WordPress environment modeled after managed WordPress hosting platforms. PHP7 on Apache.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "./build.sh",
+    "clean": "vagrant destroy -f",
+    "version": "node -e \"eval(require('./package.json').version_script_src.join(''))\" && git add -u"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ideasonpurpose/basic-wordpress-box.git"
+  },
+  "keywords": [
+    "vagrant",
+    "wordpress",
+    "base-box"
+  ],
+  "version_files": [
+    "README.md",
+    "wp-content/themes/iop/style.css"
+  ],
+  "author": "Joe Maller <joe@ideasonpurpose.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ideasonpurpose/basic-wordpress-box/issues"
+  },
+  "homepage": "https://github.com/ideasonpurpose/basic-wordpress-box#readme",
+  "version_script_src": [
+    "const sed = require('shelljs').sed;",
+    "const jsonfile = require('jsonfile');",
+    "const pkg = require('./package.json');",
+    "pkg.version_files.forEach(f => {",
+    "  jsonfile.readFile(f, (err, data) => {",
+    "    if (err) {",
+    "     sed('-i', /^([# ]*Version: *).*/, `$1${ pkg.version }`, f);",
+    "    } else  {",
+    "      data.version = pkg.version;",
+    "      jsonfile.writeFileSync(f, data, {spaces: 2});",
+    "    }",
+    "  });",
+    "});"
+  ],
+  "devDependencies": {
+    "jsonfile": "^2.4.0",
+    "shelljs": "^0.7.5"
+  }
+}
