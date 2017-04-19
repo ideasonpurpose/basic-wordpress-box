@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# version 1.2.0
+# version 1.2.1
 
 $boxname = "packer-base"
 Vagrant.configure(2) do |config|

@@ -24,8 +24,18 @@
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
       "vm_name": "packer-basic-wp-box",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "1024"],
-        ["modifyvm", "{{.Name}}", "--ioapic", "off"]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "1024"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--ioapic",
+          "off"
+        ]
       ]
     }
   ],
@@ -34,5 +44,6 @@
       "type": "vagrant",
       "output": "box/{{.Provider}}-basic-wp.box"
     }
-  ]
+  ],
+  "version": "1.2.1"
 }
