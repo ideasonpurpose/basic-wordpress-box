@@ -1,0 +1,18 @@
+---
+
+- name: Get Latest Composer version
+  uri:
+    url: https://getcomposer.org/versions
+    return_content: yes
+  register: composer_versions
+
+- name: Download and install composer.phar
+  get_url:
+    url: https://getcomposer.org{{ composer_versions.json.stable[0].path }}
+    dest: /usr/local/bin/composer
+    force: yes
+
+- name: set permissions for composer binary
+  file:
+    path: /usr/local/bin/composer
+    mode: 0755

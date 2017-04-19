@@ -2,5 +2,6 @@
 
 - include: php.yml
 - include: php-debug.yml
+- include: composer.yml
 - include: kint.yml
 - include: tideways-xhprof.yml
