@@ -28,7 +28,7 @@
           "modifyvm",
           "{{.Name}}",
           "--memory",
-          "1024"
+          "512"
         ],
         [
           "modifyvm",
@@ -44,6 +44,5 @@
       "type": "vagrant",
       "output": "box/{{.Provider}}-basic-wp.box"
     }
-  ],
-  "version": "1.2.1"
+  ]
 }

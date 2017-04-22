@@ -19,7 +19,6 @@
     "base-box"
   ],
   "version_files": [
-    "basic-wp.json",
     "README.md",
     "Vagrantfile"
   ],
