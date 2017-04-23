@@ -22,8 +22,9 @@ Vagrant.configure(2) do |config|
       else 2
     end
 
+    v.customize ["modifyvm", :id, "--cableconnected1", 'on']
     v.customize ["modifyvm", :id, "--name", $boxname]
-    v.customize ['modifyvm', :id, '--memory', 1024]
+    v.customize ['modifyvm', :id, '--memory', 2048]
     v.customize ['modifyvm', :id, '--cpus', cpus]
   end
 
