@@ -20,6 +20,7 @@
   ],
   "version_files": [
     "README.md",
+    "ansible/main.yml",
     "Vagrantfile"
   ],
   "author": "Joe Maller <joe@ideasonpurpose.com>",
