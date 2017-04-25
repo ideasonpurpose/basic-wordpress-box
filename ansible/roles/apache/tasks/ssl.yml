@@ -1,0 +1,8 @@
+---
+- name: Create /etc/apache2/ssl
+  file: 
+    path: /etc/apache2/ssl
+    state: directory
+
+- name: Generate self-signed ssl cert
+  command: openssl req -new -nodes -x509 -subj "/C=US/ST=NY/L=NY/O={{ site_name }}/CN={{ site_name }}" -days 1000 -keyout /etc/apache2/ssl/basic-wp.key -out /etc/apache2/ssl/basic-wp.crt 

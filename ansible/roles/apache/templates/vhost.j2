@@ -11,3 +11,21 @@
     ErrorLog /var/log/apache2/error.log
     TransferLog /var/log/apache2/access.log
 </VirtualHost>
+
+
+<VirtualHost *:443>
+    DocumentRoot {{ document_root }}
+
+    <directory {{ document_root }}>
+        Options All
+        AllowOverride all
+        Order allow,deny
+        Allow from all
+    </directory>
+
+    SSLEngine On
+    SSLOptions +StrictRequire
+    SSLCertificateFile /etc/apache2/ssl/basic-wp.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/basic-wp.key
+    SSLProtocol TLSv1
+</VirtualHost>
