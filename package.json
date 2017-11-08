@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/ideasonpurpose/basic-wordpress-box#readme",
   "devDependencies": {
-    "version-everything": "^0.1.1"
+    "version-everything": "^0.2.1"
   }
 }
