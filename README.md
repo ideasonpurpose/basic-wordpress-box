@@ -21,7 +21,7 @@ Please use the latest [Ansible development checkout][ansible-dev] to build boxes
 ## More Information
 The base box is built on top of [Ubuntu Cloud Images’](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit image.
 
-The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple [Packer][] workflow freezes that box so it can be uploaded to [Vagrant Cloud][] and used for individual WordPress development.
+The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple [Packer][] workflow freezes that box so it can be uploaded to [Vagrant Cloud][] and used for individual WordPress development. Builds take 20-25 minutes to complete.
 
 ## What’s installed
 The bare minimum. No security considerations, just what’s needed to get WordPress running and a few helpful extras:
@@ -33,9 +33,10 @@ The bare minimum. No security considerations, just what’s needed to get WordPr
   * 100 MB max_upload_filesize
 * MySQL 5.6.x
   * Query Cache disabled
+* Git (latest)
 * [Composer][]
 * Debugging tools: [Kint][], [xDebug][] and [Tideways][]/[XHProf][]
-* [wp-cli][]
+* [wp-cli][](latest)
 * PHP-GD and PHP-Imagick ([GD][] and [ImageMagick][])
 
 Man pages, locales and docs have all been stripped out to help shrink the size of the generated box. 

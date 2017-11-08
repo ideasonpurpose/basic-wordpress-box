@@ -15,31 +15,35 @@
 
     - name: Disable apt's cache
       copy:
-        content='Dir::Cache { srcpkgcache ""; pkgcache ""; }'
-        dest=/etc/apt/apt.conf.d/02nocache
+        content: 'Dir::Cache { srcpkgcache ""; pkgcache ""; }'
+        dest: /etc/apt/apt.conf.d/02nocache
 
     - name: install python-software-properties (required for apt-add-repository)
-      apt: pkg=python-software-properties state=installed update_cache=yes
+      apt: 
+        pkg: python-software-properties
+        state: installed
+        update_cache: yes
 
     - name: install unzip (for local provisioning on the VM)
       apt:
-        pkg=unzip
-        state=installed
+        pkg: unzip
+        state: installed
 
     - name: Add vagrant user to www-data group
       user:
-        name=vagrant
-        groups=www-data
-        append=yes
+        name: vagrant
+        groups: www-data
+        append: yes
 
     - name: Add www-data user to vagrant group ¯\_(ツ)_/¯
       user:
-        name=www-data
-        groups=vagrant
-        append=yes
+        name: www-data
+        groups: vagrant
+        append: yes
 
   roles: 
     - swapfile
+    - git
     - virtualbox
     - { role: apache, site_root: '/var/www/wordpress', document_root: '/var/www/wordpress', site_name: basic-wp }
     - ansible
@@ -62,4 +66,6 @@
       mysql_user: 'name={{ wp_config.db_user }} password={{ wp_config.db_password }} priv=*.*:ALL state=present'
 
     - name: Create a new Database
-      mysql_db: name={{ wp_config.db_name }} state=present
+      mysql_db: 
+        name: '{{ wp_config.db_name }}'
+        state: present
