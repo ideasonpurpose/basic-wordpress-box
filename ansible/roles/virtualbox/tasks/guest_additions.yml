@@ -25,12 +25,7 @@
     url: http://download.virtualbox.org/virtualbox/LATEST.TXT
     return_content: yes
   register: vbox_latest
-  
-- name: "temp fix for 5.1.20 Guest Additions regression (http://stackoverflow.com/questions/43492322)"
-  set_fact: 
-    vbox_latest:
-      content: '5.1.18'
-  
+
 - name: Download Guest Additions ISO
   get_url: 
     url: http://download.virtualbox.org/virtualbox/{{ vbox_latest.content | trim }}/VBoxGuestAdditions_{{ vbox_latest.content | trim }}.iso
