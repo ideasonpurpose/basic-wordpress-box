@@ -1,7 +1,7 @@
 *This project just builds a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)*
 
 # Basic WordPress Box
-##### Version 1.3.0
+##### Version 1.4.0
 
 This project builds a basic LAMP box configured for vanilla WordPress installations and modeled after managed WordPress hosting platforms like WP Engine or Flywheel. The generated Vagrant box is available on Hashicorp’s Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
 
