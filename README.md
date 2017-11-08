@@ -15,13 +15,13 @@ Please use the latest [Ansible development checkout][ansible-dev] to build boxes
 1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
 2. `cd basic-wordpress-box`
 3. Run `npm build` (or just `./build.sh`)
-4. Upload the output box `virtualbox-basic-wp.box` to [Hashicorp Atlas](https://atlas.hashicorp.com/help/vagrant/boxes/create)
+4. Upload the output box `virtualbox-basic-wp.box` to [Hashicorp Vagrant Cloud](https://app.vagrantup.com/ideasonpurpose/boxes/basic-wp)
 
 
 ## More Information
 The base box is built on top of [Ubuntu Cloud Images’](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit image.
 
-The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple [Packer][] workflow freezes that box so it can be uploaded to [Atlas][] and used for individual WordPress development.
+The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple [Packer][] workflow freezes that box so it can be uploaded to [Vagrant Cloud][] and used for individual WordPress development.
 
 ## What’s installed
 The bare minimum. No security considerations, just what’s needed to get WordPress running and a few helpful extras:
@@ -87,7 +87,7 @@ This project is sponsored by and used in production at [Ideas On Purpose][iop]
 [gd]: http://libgd.github.io/
 [imagemagick]: http://www.imagemagick.org/
 [packer]: https://www.packer.io
-[atlas]: https://atlas.hashicorp.com/ideasonpurpose
+[Vagrant Cloud]: https://app.vagrantup.com/ideasonpurpose
 [vagrant]: https://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
 [ansible]: http://docs.ansible.com/
