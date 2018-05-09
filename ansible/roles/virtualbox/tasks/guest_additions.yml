@@ -45,9 +45,6 @@
   register: install_result
   failed_when: "'FAILED' in install_result.stderr"
 
-- debug:
-    var: install_result
-
 - name: Unmount Guest Additions ISO
   mount:
     name: /media/VBoxGuestAdditions
