@@ -8,8 +8,9 @@
         Allow from all
     </directory>
 
-    ErrorLog /var/log/apache2/error.log
-    TransferLog /var/log/apache2/access.log
+    ErrorLog /vagrant/logs/error.log
+    TransferLog /vagrant/logs/access.log
+    CustomLog /vagrant/logs/access.log common
 </VirtualHost>
 
 

@@ -1,4 +1,12 @@
 ---
+- name: Create temporary directories so config succeeds
+  file:
+    path: /vagrant/logs
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+
 - name: Install Apache mods
   apache2_module: name={{ item }} state=present
   with_items:

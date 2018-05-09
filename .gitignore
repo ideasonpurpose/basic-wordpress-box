@@ -4,3 +4,4 @@ box
 node_modules
 .vagrant
 *.retry
+*.log
