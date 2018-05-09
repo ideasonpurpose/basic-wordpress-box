@@ -7,7 +7,7 @@
   - name: install Git
     apt:
       pkg: git
-      state: installed
+      state: present
       update_cache: yes
 
   - name: Remove Git repo (clean up)
