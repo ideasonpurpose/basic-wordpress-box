@@ -16,10 +16,12 @@
     - php{{ php_version }}-curl
     - php{{ php_version }}-gd
     - php{{ php_version }}-imagick
-    - php{{ php_version }}-mcrypt
+    - php{{ php_version }}-intl
+    - php{{ php_version }}-mbstring
     - php{{ php_version }}-mysql
     - php{{ php_version }}-xml
     - php{{ php_version }}-xmlrpc
+    - php-sodium
 
 - name: Write INI for default time zone
   template: 
@@ -50,10 +52,11 @@
 - name: Enable Mod INIs
   command: phpenmod {{ item }}
   with_items:
-    - mcrypt
     - timezone
     - error_reporting
     - disable_opcache
+    - mbstring
+    - intl
     - upload_max_filesize
     - max_execution_time
     - xmlrpc
