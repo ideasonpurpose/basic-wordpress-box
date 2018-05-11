@@ -1,52 +1,58 @@
-*This project just builds a base box, our WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)*
+_This project just builds a base box. Our complete WordPress Vagrant environment is over here: [ideasonpurpose/basic-wordpress-vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant)_
 
 # Basic WordPress Box
+
 ##### Version 1.4.0
 
-This project builds a basic LAMP box configured for vanilla WordPress installations and modeled after managed WordPress hosting platforms like WP Engine or Flywheel. The generated Vagrant box is available on Hashicorp’s Atlas at [atlas.hashicorp.com/ideasonpurpose](https://atlas.hashicorp.com/ideasonpurpose)
+This project's primary goal is to create an excepionally fast-to-spin-up Vagrant box for local WordPress development. To do achieve this, we've front-loaded as much boilerplate configuration as possible onto a small and clean base box. Server requirements for WordPress are very basic requirements and rarely change from site to site. Baking that boilerplate into the box makes more sense than compiling everything each time we spin up a new instance.
 
-The primary design goal of this project is to front-load as much boilerplate configuration as possible, producing a clean base box with a stable, default WordPress environment which can be quickly spun up and torn down for local maintenance and development.
+The box is a basic LAMP stack configured to run vanilla WordPress, modeled after managed WordPress hosting platforms like WP Engine or Flywheel. The generated Vagrant box is available on Hashicorp’s Vagrant Cloud at [app.vagrantup.com/ideasonpurpose](https://app.vagrantup.com/ideasonpurpose)
 
-[Basic WordPress Vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant) is a complete, fast-to-spin-up local WordPress development environment based on this box.
+[Basic WordPress Vagrant](https://github.com/ideasonpurpose/basic-wordpress-vagrant) is a complete local WordPress development environment based on this box.
 
 ## Install and Build
-Please use the latest [Ansible development checkout][ansible-dev] to build boxes.
 
-1. Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
-2. `cd basic-wordpress-box`
-3. Run `npm build` (or just `./build.sh`)
-4. Upload the output box `virtualbox-basic-wp.box` to [Hashicorp Vagrant Cloud](https://app.vagrantup.com/ideasonpurpose/boxes/basic-wp)
+For box development, please use the latest [Ansible development checkout][ansible-dev].
 
+1.  Clone this repo `git clone https://github.com/ideasonpurpose/basic-wordpress-box`
+2.  `cd basic-wordpress-box`
+3.  Run `npm build` (or just `./build.sh`)
+4.  Upload the output box `virtualbox-basic-wp.box` to [Hashicorp Vagrant Cloud](https://app.vagrantup.com/ideasonpurpose/boxes/basic-wp)
 
 ## More Information
+
 The base box is built on top of [Ubuntu Cloud Images’](http://cloud-images.ubuntu.com) official Vagrant [Ubuntu Server 14.04 LTS (Trusty Tahr)](http://cloud-images.ubuntu.com/vagrant/trusty/current/) 32-bit image.
 
-The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Next, a simple [Packer][] workflow freezes that box so it can be uploaded to [Vagrant Cloud][] and used for individual WordPress development. Builds take 20-25 minutes to complete.
+The initial build uses Vagrant and Ansible to provision an optimal WordPress distribution. Then a simple [Packer][] workflow freezes that box so it can be uploaded to [Vagrant Cloud][] and used for individual WordPress development. Builds take 20-25 minutes to complete.
 
 ## What’s installed
+
 The bare minimum. No security considerations, just what’s needed to get WordPress running and a few helpful extras:
 
 * Apache 2.4.x
-* PHP 7.0.x
+* PHP 7.2.x
   * All Errors visible
   * 30 minute max_execution_time
   * 100 MB max_upload_filesize
 * MySQL 5.6.x
   * Query Cache disabled
 * Git (latest)
+* Ansible (for local provisioning on the VM)
 * [Composer][]
 * Debugging tools: [Kint][], [xDebug][] and [Tideways][]/[XHProf][]
 * [wp-cli][](latest)
 * PHP-GD and PHP-Imagick ([GD][] and [ImageMagick][])
 
-Man pages, locales and docs have all been stripped out to help shrink the size of the generated box. 
+Man pages, locales and docs have all been stripped out to help shrink the size of the generated box.
 
 ## What’s Different?
 
 Not much, the main difference from a production environment is that all PHP debugging and errors are enabled and visible. Even [Tideways][]/[XHProf](http://php.net/xhprof) is installed. **Errors should never pass silently. [Unless explicitly silenced.](https://www.python.org/dev/peps/pep-0020/)**
 
+Server logs are configured to write to
 
 ## Local Testing
+
 The build script will add the newly generated box to vagrant with the name `basic-wp`. To test locally, just reference the box in a Vagrantfile or run this:
 
     $ vagrant init basic-wp
@@ -61,7 +67,8 @@ Vagrant.configure(2) do |config|
 ```
 
 ## Development Requirements
-To generate updated versions of the basic-wp box, the following tools should be installed: 
+
+To generate updated versions of the basic-wp box, the following tools should be installed:
 
 * [VirtualBox][]
 * [Vagrant][]
@@ -88,7 +95,7 @@ This project is sponsored by and used in production at [Ideas On Purpose][iop]
 [gd]: http://libgd.github.io/
 [imagemagick]: http://www.imagemagick.org/
 [packer]: https://www.packer.io
-[Vagrant Cloud]: https://app.vagrantup.com/ideasonpurpose
+[vagrant cloud]: https://app.vagrantup.com/ideasonpurpose
 [vagrant]: https://www.vagrantup.com/
 [virtualbox]: https://www.virtualbox.org/
 [ansible]: http://docs.ansible.com/
