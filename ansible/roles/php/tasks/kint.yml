@@ -9,11 +9,7 @@
     mode: 0755
   register: var_www_lib_kint
 
-- name: Extract Kint archive on remote host
-  unarchive: 
-    src: 'https://github.com/kint-php/kint/archive/master.zip'
+- name: Download Kint phar to remote host
+  get_url: 
+    url: 'https://raw.githubusercontent.com/kint-php/kint/master/build/kint.phar'
     dest: '{{ var_www_lib_kint.path }}'
-    # owner: www-data
-    # group: www-data
-    # mode: 0755
-    remote_src: yes
