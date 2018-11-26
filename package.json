@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "./build.sh",
-    "clean": "vagrant destroy -f",
+    "clean": "vagrant destroy -f && rm -rf ./box",
     "version": "version-everything && git add -u"
   },
   "repository": {
