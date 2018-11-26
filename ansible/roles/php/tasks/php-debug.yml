@@ -6,13 +6,10 @@
 
 - name: "Install PHP Debugging Tools"
   apt: 
-    pkg: '{{ item }}'
-    state: installed 
+    pkg:
+        - php-xdebug
+    state: present 
     update_cache: yes
-  with_items:
-    - php-xdebug
-  # notify:
-  #   - remove php ppa
 
 - name: Write error reporting INI
   copy:

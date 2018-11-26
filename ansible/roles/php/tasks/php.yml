@@ -6,22 +6,21 @@
 
 - name: "Install PHP"
   apt: 
-    pkg: '{{ item }}'
+    pkg: 
+        - php{{ php_version }}
+        - php{{ php_version }}-cli
+        - php{{ php_version }}-common
+        - php{{ php_version }}-curl
+        - php{{ php_version }}-gd
+        - php{{ php_version }}-imagick
+        - php{{ php_version }}-intl
+        - php{{ php_version }}-mbstring
+        - php{{ php_version }}-mysql
+        - php{{ php_version }}-xml
+        - php{{ php_version }}-xmlrpc
+        - php-sodium
     state: installed
     update_cache: yes
-  with_items:
-    - php{{ php_version }}
-    - php{{ php_version }}-cli
-    - php{{ php_version }}-common
-    - php{{ php_version }}-curl
-    - php{{ php_version }}-gd
-    - php{{ php_version }}-imagick
-    - php{{ php_version }}-intl
-    - php{{ php_version }}-mbstring
-    - php{{ php_version }}-mysql
-    - php{{ php_version }}-xml
-    - php{{ php_version }}-xmlrpc
-    - php-sodium
 
 - name: Write INI for default time zone
   template: 

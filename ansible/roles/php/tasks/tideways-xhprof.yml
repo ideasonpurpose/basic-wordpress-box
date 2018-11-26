@@ -6,12 +6,11 @@
 
 - name: "Install Tideways and GraphViz"
   apt: 
-    pkg: '{{ item }}'
-    state: installed
+    pkg:
+        - php-tideways
+        - graphviz
+    state: present
     update_cache: yes
-  with_items:
-    - php-tideways
-    - graphviz
 
 - name: Make sure /var/www/lib/xhprof exists
   file:

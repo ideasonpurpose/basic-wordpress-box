@@ -4,17 +4,19 @@
   file: path=/var/www/html state=absent
   
 - name: Remove unneeded software
-  apt: name={{ item }} state=absent purge=yes
-  with_items: 
-    - apt-xapian-index
-    - bash-completion
-    - chef
-    - puppet
-    - vim-common
-    # - x11-common  # removing this also removes GraphViz -- oops. 
-    - poppler-data
-    - netcat-openbsd
-    - tasksel
+  apt: 
+    name: 
+        - apt-xapian-index
+        - bash-completion
+        - chef
+        - puppet
+        - vim-common
+        # - x11-common  # removing this also removes GraphViz -- oops. 
+        - poppler-data
+        - netcat-openbsd
+        - tasksel
+    state: absent
+    purge: yes
 
 # This triggers a deprecation warning, but I couldn't get Ansible's
 # v2.1 module syntax to run without failing with this Module Error:
@@ -22,6 +24,8 @@
 # http://docs.ansible.com/ansible/apt_module.html#options
 - name: Remove apt leftovers and orphans (apt-get autoremove -y)
   shell: apt-get autoremove -y
+  args:
+    warn: no
 
 - name: Thin unused files and directories in /usr/share
   file: path={{ item }} state=absent

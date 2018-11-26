@@ -1,9 +1,11 @@
 ---
 
 - name: Install Apache
-  apt: name={{ item }} state=installed update_cache=yes
-  with_items: 
-    - apache2
+  apt: 
+    name:
+        - apache2
+    state: present
+    update_cache: yes
 
 - name: Set Apache's default umask to 0002 (g+w)
   lineinfile: 

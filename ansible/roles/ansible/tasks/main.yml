@@ -1,10 +1,17 @@
 ---
 
 - name: Add Ansible PPA
-  apt_repository: repo='ppa:ansible/ansible'
+  apt_repository: 
+    repo: 'ppa:ansible/ansible'
+    state: present
 
 - name: "Install Ansible"
-  apt: pkg=ansible state=installed update_cache=yes
+  apt: 
+    pkg: ansible 
+    state: present
+    update_cache: yes
 
-- name: Remove Ansible repo (clean up)
-  apt_repository: repo='ppa:ansible/ansible' state=absent
+- name: Remove Ansible PPA (clean up)
+  apt_repository: 
+    repo: 'ppa:ansible/ansible'
+    state: absent

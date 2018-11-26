@@ -5,20 +5,20 @@
 
 - name: Remove Default VirtualBox Guest Additions
   apt:
-    name: '{{ item }}'
+    name: 
+        - virtualbox-guest-dkms
+        - virtualbox-guest-utils
+        - virtualbox-guest-x11
+
     autoremove: yes
     state: absent
     purge: yes
-  with_items:
-    - virtualbox-guest-dkms
-    - virtualbox-guest-utils
-    - virtualbox-guest-x11
 
 - name: Install build-essentials to compile Guest Additions
   apt:
     name: build-essential
     update_cache: yes
-    state: installed
+    state: present
 
 - name: Fetch Current VirtualBox version
   uri: 

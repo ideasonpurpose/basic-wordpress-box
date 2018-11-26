@@ -45,15 +45,25 @@
     - mysql
     - wp-cli
     - clean_ubuntu
+
   post_tasks:
     - name: Setup default wordpress symlink
-      file: >-
-        state=link src=/vagrant/site dest=/var/www/wordpress force=yes
-        owner=www-data group=www-data
+      file:
+        state: link
+        src: /vagrant/site
+        dest: /var/www/wordpress
+        force: yes
+        owner: www-data 
+        group: www-data 
+        follow: no
+
     - name: Create default WordPress MySQL user
-      mysql_user: >-
-        name={{ wp_config.db_user }} password={{ wp_config.db_password }}
-        priv=*.*:ALL state=present
+      mysql_user:
+        name: '{{ wp_config.db_user }}'
+        password: '{{ wp_config.db_password }}'
+        priv: '*.*:ALL'
+        state: present
+
     - name: Create a new Database
       mysql_db:
         name: '{{ wp_config.db_name }}'
