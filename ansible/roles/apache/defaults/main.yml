@@ -8,3 +8,8 @@ site_root: '/var/www/{{ site_name }}'
 
 # document_root is the entry point for the web site, eg. {{ site_root }}/laravel/public
 document_root: '{{ site_root }}/public'
+
+# Confs to enable
+apache_confs:
+  - mpm-prefork.conf
+  - servername.conf

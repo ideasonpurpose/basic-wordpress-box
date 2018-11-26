@@ -1,0 +1,15 @@
+---
+
+- name: Push our Apache confs
+  template:     
+    src: '{{item}}.j2' 
+    dest: /etc/apache2/conf-available/{{ item }}
+    mode: '0640'
+  with_items: '{{apache_confs}}'
+
+
+- name: Enable Apache confs
+  command: a2enconf {{ item }}
+  with_items: '{{apache_confs}}'
+  notify:
+    - restart apache

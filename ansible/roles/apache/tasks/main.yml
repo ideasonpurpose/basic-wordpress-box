@@ -2,5 +2,6 @@
 
 - include: apache.yml
 - include: mods.yml
+- include: confs.yml
 - include: ssl.yml
 - include: vhost.yml
