@@ -2,7 +2,7 @@ _This project just builds a base box. Our complete WordPress Vagrant environment
 
 # Basic WordPress Box
 
-##### Version 1.5.0
+##### Version 1.6.0
 
 This project's primary goal is to create an excepionally fast-to-spin-up Vagrant box for local WordPress development. To do achieve this, we've front-loaded as much boilerplate configuration as possible onto a small and clean base box. Server requirements for WordPress are very basic requirements and rarely change from site to site. Baking that boilerplate into the box makes more sense than compiling everything each time we spin up a new instance.
 
