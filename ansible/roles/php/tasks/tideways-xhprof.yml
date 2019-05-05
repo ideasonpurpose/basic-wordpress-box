@@ -21,7 +21,7 @@
     mode: 0755
   register: var_www_lib_xhprof
 
-- name: Extract Kint archive on remote host ONE STEP
+- name: Extract xhprof archive on remote host ONE STEP
   unarchive: 
     src: 'https://github.com/phacility/xhprof/archive/master.zip'
     dest: '{{ var_www_lib_xhprof.path }}'
