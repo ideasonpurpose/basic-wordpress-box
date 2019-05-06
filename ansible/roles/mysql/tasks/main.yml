@@ -4,7 +4,7 @@
   apt: name=python-mysqldb update_cache=yes
 
 - name: install MySQL-server 
-  apt: name=mysql-server-5.6
+  apt: name=mysql-server-5.7
 
 - set_fact:
     mysql_root_password: "password"
