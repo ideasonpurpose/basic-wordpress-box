@@ -19,7 +19,7 @@
         - php{{ php_version }}-xml
         - php{{ php_version }}-xmlrpc
         - php-sodium
-    state: installed
+    state: present
     update_cache: yes
 
 - name: Write INI for default time zone
