@@ -1,5 +1,8 @@
 #!/bin/bash -eux
 
+# Apt cleanup.
+sudo apt-get -y autoremove
+
 # Delete unneeded files.
 rm -f /home/vagrant/*.sh
 rm -f /home/vagrant/VBoxGuestAdditions.iso

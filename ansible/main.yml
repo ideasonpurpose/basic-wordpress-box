@@ -13,11 +13,11 @@
       copy:
         content: 'Dir::Cache { srcpkgcache ""; pkgcache ""; }'
         dest: /etc/apt/apt.conf.d/02nocache
-    - name: install python-software-properties (required for apt-add-repository)
-      apt:
-        pkg: python-software-properties
-        state: present
-        update_cache: 'yes'
+    # - name: install python-software-properties (required for apt-add-repository)
+    #   apt:
+    #     pkg: python-software-properties
+    #     state: present
+    #     update_cache: 'yes'
     - name: install unzip (for local provisioning on the VM)
       apt:
         pkg: unzip
@@ -34,7 +34,7 @@
         append: 'yes'
   roles:
     - swapfile
-    - git
+    # - git
     - virtualbox
     - role: apache
       site_root: /var/www/wordpress

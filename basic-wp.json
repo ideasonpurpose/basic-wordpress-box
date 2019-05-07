@@ -1,4 +1,22 @@
 {
+  "variables": {
+    "HOME": "{{env `HOME`}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-ovf",
+      "source_path": "box/basic-wp.ovf",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_private_key_file": "{{ user `HOME` }}/.vagrant.d/insecure_private_key",
+      "ssh_wait_timeout": "10m",
+      "ssh_port": 22,
+      "headless": true,
+      "guest_additions_mode": "disable",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "vm_name": "packer-basic-wp-box"
+    }
+  ],
   "provisioners": [
     {
       "type": "shell",
@@ -9,34 +27,6 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/cleanup.sh"
-    }
-  ],
-  "builders": [
-    {
-      "type": "virtualbox-ovf",
-      "source_path": "box/basic-wp.ovf",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "boot_wait": "10s",
-      "headless": true,
-      "guest_additions_mode": "disable",
-      "ssh_wait_timeout": "300s",
-      "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "vm_name": "packer-basic-wp-box",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "512"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--ioapic",
-          "off"
-        ]
-      ]
     }
   ],
   "post-processors": [

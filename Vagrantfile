@@ -4,14 +4,17 @@
 # version 1.7.0
 
 $boxname = "packer-base"
+
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/trusty32"
+  config.vm.box = "ubuntu/xenial64"
+  # config.vm.box = "ubuntu/bionic64"
 
   # disable vagrant-hostmanager if it's installed
   config.hostmanager.enabled = false if Vagrant.has_plugin? 'vagrant-hostmanager'
 
   # prevent key replacement for base builds
   config.ssh.insert_key = false
+  # config.vm.network "forwarded_port", guest: 22, host: 22222, auto_correct: true
 
   config.vm.provider "virtualbox" do |v|
 
@@ -28,7 +31,7 @@ Vagrant.configure(2) do |config|
     v.customize ['modifyvm', :id, '--cpus', cpus]
   end
 
-  config.vm.provision "ansible" do |ansible|
+  config.vm.provision "ansible_local" do |ansible|
     # ansible.verbose = "vvvv"  # for debugging Ansible playbooks
     ansible.compatibility_mode = "2.0"
     ansible.playbook = "ansible/main.yml"
