@@ -1,6 +1,6 @@
 {
   "name": "basic-wordpress-box",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A basic WordPress environment modeled after managed WordPress hosting platforms. PHP7 on Apache.",
   "main": "index.js",
   "private": true,
