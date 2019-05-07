@@ -11,5 +11,5 @@ vagrant halt
 mkdir -p box
 rm -f box/*.{ovf,vmdk}
 VBoxManage export packer-base --ovf20 -o box/basic-wp.ovf
-packer build basic-wp.json
+PACKER_LOG=1 packer build basic-wp.json
 vagrant box add --force basic-wp box/virtualbox-basic-wp.box
