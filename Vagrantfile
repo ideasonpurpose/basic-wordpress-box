@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# version 1.7.1
+# version 1.7.2
 
 $boxname = "packer-base"
 
